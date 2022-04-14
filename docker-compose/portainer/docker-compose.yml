@@ -13,8 +13,4 @@ services:
       - ./portainer-data:/data
     ports:
       - 9000:9000
-    lables:
-      - "trafik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`portainer.homenet.home`)"
-      - "traefik.http.routers.frontend.entrypoints=web"
-      - "traefik.http.services.frontend.loadbalancer.server.port=9000"
+      - 9443:9443
