@@ -1,0 +1,8 @@
+Version: '3'\
+services:
+  app:
+    image: 'dperson/samba'
+    restart: unless-stopped
+    ports:
+      - '139:139'
+      - '445:445'
