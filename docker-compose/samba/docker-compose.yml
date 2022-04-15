@@ -1,4 +1,4 @@
-Version: '3'\
+version: '3'
 services:
   app:
     image: 'dperson/samba'
@@ -6,3 +6,5 @@ services:
     ports:
       - '139:139'
       - '445:445'
+    volumes:
+      - /mnt/hardisk:/share
