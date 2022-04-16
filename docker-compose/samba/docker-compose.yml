@@ -8,3 +8,4 @@ services:
       - '445:445'
     volumes:
       - /mnt/hardisk:/share
+      
