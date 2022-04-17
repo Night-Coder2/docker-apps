@@ -8,4 +8,13 @@ services:
       - '445:445'
     volumes:
       - /mnt/hardisk:/share
+    environment:
+     PUID: 1000
+     PGID: 1000
+     USERID: 1000
+     GROUPID: 1000
+     USER: guest;guest
+     PERMISSIONS: true 
+     SHARE: portainer;/share;yes;no;yes;guest
+     PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       
