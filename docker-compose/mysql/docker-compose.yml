@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: mySQL
+    image: mysql:latest
+
+    ports:
+      -"3306:3306"
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=Sudhir@28
+    
+    volumes:
+      -'/mySQL:/var/lib/mysql'
+
+    restart: always
