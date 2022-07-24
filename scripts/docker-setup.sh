@@ -2,8 +2,6 @@
 sudo apt update
 sudo apt upgrade -y
 sudo apt dist-upgrade
-curl -fsSL https://deb.nodesource.com/setup_17.x | bash -
-sudo apt-get install -y nodejs
 curl -sSL https://get.docker.com | sh
 sudo apt-get install libffi-dev libssl-dev -y
 sudo apt install python3-dev -y
