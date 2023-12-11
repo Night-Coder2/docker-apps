@@ -1,0 +1,70 @@
+version: '3'
+services:
+  # traefik:
+  #   image: traefik:v2.10.4
+  #   container_name: traefik
+  #   networks:
+  #     monitoring:
+  #       ipv4_address: 192.168.92.15
+  #   ports:
+  #     - 8084:80
+  #     - 3444:443
+  #     # -- (Optional) Enable Dashboard, don't do in production
+  #     - 8080:8080
+  #   volumes:
+  #     - ./config:/etc/traefik
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #   # -- (Optional) When using Cloudflare as Cert Resolver
+  #   # environment:
+  #   #   - CF_DNS_API_TOKEN=your-cloudflare-api-token
+  #   # -- (Optional) When using a custom network
+  #   # networks:
+  #   #   - your-traefik-network
+  #   restart: unless-stopped
+  adguard_exporter:
+    image: ebrianne/adguard-exporter
+    restart: always
+    environment:
+      - adguard_protocol=http
+      - adguard_hostname=192.168.92.13
+      - adguard_username=sudhir
+      - adguard_password=Sudhir@28
+      - interval=10s
+      - log_limit=10000
+    networks:
+        monitoring:
+          ipv4_address: 192.168.92.14
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: unless-stopped
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prom_data:/prometheus
+    networks:
+        monitoring:
+          ipv4_address: 192.168.92.12
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: unless-stopped
+    volumes:
+      - ./grafana:/etc/grafana/provisioning/datasources
+      - grafana-storage:/var/lib/grafana
+    networks:
+        monitoring:
+          ipv4_address: 192.168.92.11
+
+networks:
+  monitoring:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.92.0/24"
+
+volumes:
+  prom_data:
+  grafana-storage:
